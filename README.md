@@ -1,4 +1,4 @@
-# cap-angular-schematic-responsive  [![NPM version](https://badge.fury.io/js/CAP.svg)](https://npmjs.org/package/CAP) [![Build Status](https://travis-ci.org/Elena%20M.%20Sarabia/CAP.svg?branch=master)](https://travis-ci.org/Elena%20M.%20Sarabia/CAP) [![Generic badge](https://img.shields.io/badge/CAP-Active-<COLOR>.svg)](https://shields.io/)
+# cap-angular-schematic-contentful  [![NPM version](https://badge.fury.io/js/CAP.svg)](https://npmjs.org/package/CAP) [![Build Status](https://travis-ci.org/Elena%20M.%20Sarabia/CAP.svg?branch=master)](https://travis-ci.org/Elena%20M.%20Sarabia/CAP) [![Generic badge](https://img.shields.io/badge/CAP-Active-<COLOR>.svg)](https://shields.io/)
  This repository is a Schematic for use with Contentful API. 
 
  The Schematic will create a service to manage Contentful queries:
@@ -42,6 +42,7 @@ Whit this service all http requests can be intercepted by a Angular Http interce
 # Example of implementation on a Angular App
 
 ### Template
+```
 <div class="row">
     <div class="col-lg-3 col-md-4 col-6" *ngFor="let item of items">
         <a routerLink="/items/{{item.id}}" title="{{item.name}}">
@@ -49,8 +50,10 @@ Whit this service all http requests can be intercepted by a Angular Http interce
         </a>
     </div>
 </div>
+```
 
 ### TS Login
+```
 this.capContentfulService.getItems('items', ['logo'])
     .subscribe((response: any) => {
         let _items = [];
@@ -59,6 +62,7 @@ this.capContentfulService.getItems('items', ['logo'])
         });
         this.items = _items;
     });
+```
 
 
 ## Usage
@@ -68,7 +72,7 @@ Angular 9
 [Schematic](https://www.schematics.com/)
 
 ## Version 
-0.0.1
+0.0.6
 
 ## Authors
 Software Allies - [Software Allies](https://github.com/software-allies)
@@ -77,4 +81,4 @@ Software Allies - [Software Allies](https://github.com/software-allies)
 César Alonso Magaña Gavilanes - [cesaralonso](https://github.com/cesaralonso)
 
 ## License
-MIT © [Software Allies](https://github.com/software-allies/cap-angular-schematic-responsive)
+MIT © [Software Allies](https://github.com/software-allies/cap-angular-schematic-contentful)
