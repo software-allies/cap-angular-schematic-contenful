@@ -33,10 +33,11 @@ The CapContentfulService have 2 starting methods to send queries to Contentful A
 
 ### Params
 * contentType: The name of content-type to get.
+* id: The id of a item to get.
 * relatedAssetKey: Array of params of related Assets, ex: ['image'], ['image', 'file']...
 
 ## Advantages over Official Contentful Client
-Whit this service all http requests can be intercepted by a Angular Http interceptor, so, can be cached, show a loading screen, and apply to requests any common use with a interceptor.
+Using this service all http requests can be intercepted by a Angular Http interceptor, so, can be cached, show a loading screen, and apply to requests any common use with a interceptor.
 
 
 # Example of implementation on a Angular App
@@ -54,14 +55,26 @@ Whit this service all http requests can be intercepted by a Angular Http interce
 
 ### TS Login
 ```
-this.capContentfulService.getItems('items', ['logo'])
-    .subscribe((response: any) => {
-        let _items = [];
-        response.items.forEach((item) => {
-            _items = [..._items, item.fields]
+import { CapContentfulService } from './modules/cap-contentful/services/cap-contetful.service';
+...
+
+socios: any[];
+
+constructor(
+    private capContentfulService: CapContentfulService
+) {}
+
+ngOnInit() {
+    this.capContentfulService.getItems('items', ['logo'])
+        .subscribe((response: any) => {
+            let _items = [];
+            response.items.forEach((item) => {
+                _items = [..._items, item.fields]
+            });
+            this.items = _items;
         });
-        this.items = _items;
-    });
+}
+
 ```
 
 
@@ -72,7 +85,7 @@ Angular 9
 [Schematic](https://www.schematics.com/)
 
 ## Version 
-0.0.6
+0.0.7
 
 ## Authors
 Software Allies - [Software Allies](https://github.com/software-allies)
