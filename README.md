@@ -1,7 +1,7 @@
 # cap-angular-schematic-responsive  [![NPM version](https://badge.fury.io/js/CAP.svg)](https://npmjs.org/package/CAP) [![Build Status](https://travis-ci.org/Elena%20M.%20Sarabia/CAP.svg?branch=master)](https://travis-ci.org/Elena%20M.%20Sarabia/CAP) [![Generic badge](https://img.shields.io/badge/CAP-Active-<COLOR>.svg)](https://shields.io/)
  This repository is a Schematic for use with Contentful API. 
 
-The Schematic will create a service to manage Contentful queries:
+ The Schematic will create a service to manage Contentful queries:
  
 
 ## Prerequisites
@@ -25,9 +25,6 @@ The schematic will be configurated after you answer the following questions.
 * What is the Contentful space? : < string >
 * What is the Contentful environment? : < string >
 
-
-
-
 ## How to use
 The CapContentfulService have 2 starting methods to send queries to Contentful API:
 
@@ -40,6 +37,28 @@ The CapContentfulService have 2 starting methods to send queries to Contentful A
 
 ## Advantages over Official Contentful Client
 Whit this service all http requests can be intercepted by a Angular Http interceptor, so, can be cached, show a loading screen, and apply to requests any common use with a interceptor.
+
+
+# Example of implementation on a Angular App
+
+### Template
+<div class="row">
+    <div class="col-lg-3 col-md-4 col-6" *ngFor="let item of items">
+        <a routerLink="/items/{{item.id}}" title="{{item.name}}">
+            <img src="{{item.logo.file.url}}" loading="lazy" class="img-fluid" alt="{{item.logo.file.title}}" title="{{item.logo.file.title}}">
+        </a>
+    </div>
+</div>
+
+### TS Login
+this.capContentfulService.getItems('items', ['logo'])
+    .subscribe((response: any) => {
+        let _items = [];
+        response.items.forEach((item) => {
+            _items = [..._items, item.fields]
+        });
+        this.items = _items;
+    });
 
 
 ## Usage
