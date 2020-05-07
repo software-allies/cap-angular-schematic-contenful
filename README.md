@@ -40,7 +40,7 @@ The CapContentfulService have 2 starting methods to send queries to Contentful A
 Using this service all http requests can be intercepted by a Angular Http interceptor, so, can be cached, show a loading screen, and apply to requests any common use with a interceptor.
 
 
-# Example of implementation on a Angular App
+# Example of implementation on a Angular app
 
 ### Template
 ```
@@ -53,7 +53,7 @@ Using this service all http requests can be intercepted by a Angular Http interc
 </div>
 ```
 
-### TS Login
+### TS Logic
 ```
 import { CapContentfulService } from './modules/cap-contentful/services/cap-contetful.service';
 ...
