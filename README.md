@@ -29,7 +29,7 @@ The schematic will be configurated after you answer the following questions.
 
 
 ## How to use
-The Cap Contentful Service have 2 starting methods to send queries to Contentful API:
+The CapContentfulService have 2 starting methods to send queries to Contentful API:
 
 * getItems(contentType: string, relatedAssetKey?: string[])
 * getItemById(contentType: string, id: string, relatedAssetKey?: string[])
