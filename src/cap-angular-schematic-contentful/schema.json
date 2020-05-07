@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "id": "SchematicsContentful",
+  "title": "CAP Schematics Contentful Service",
+  "type": "object",
+  "properties": {
+    "contSpace": {
+      "type": "string",
+      "description": "Contentful Space",
+      "x-prompt": "What is the Contentful Space?",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      }
+    },
+    "contAccessToken": {
+      "type": "string",
+      "description": "Contentful Access Token",
+      "x-prompt": "What is the Contentful access token?",
+      "$default": {
+        "$source": "argv",
+        "index": 1
+      }
+    },
+    "contentfulEnvironment": {
+      "type": "string",
+      "description": "Contentful Environment",
+      "x-prompt": "What is the Contentful Environment?",
+      "$default": {
+        "$source": "argv",
+        "index": 2
+      }
+    }
+  },
+  "required": ["title", "removeAppComponentHtml", "auth", "authService", "sfcore"]
+}
