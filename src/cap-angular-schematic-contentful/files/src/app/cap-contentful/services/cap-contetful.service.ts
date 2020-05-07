@@ -54,7 +54,7 @@ export class CapContentfulService {
         return response.items;
     }
 
-    getItem(contentType: string, relatedAssetKey?: string[]): Observable<any> {
+    getItems(contentType: string, relatedAssetKey?: string[]): Observable<any> {
         const _url = `${this.actionUrl}entries?content_type=${contentType}`;
         return this._http.get<any>(_url, this.httpOptions)
         .pipe(

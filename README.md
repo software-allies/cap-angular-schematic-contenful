@@ -27,6 +27,18 @@ The schematic will be configurated after you answer the following questions.
 The Schematic will create a service to manage Contentful queries:
 
 
+## How to use
+
+The Cap Contentful Service have 2 starting methods to send queries to Contentful API:
+
+* getItems(contentType: string, relatedAssetKey?: string[])
+* getItemById(contentType: string, id: string, relatedAssetKey?: string[])
+
+### Params
+* contentType: The name of content-type to get.
+* relatedAssetKey: Array of params of related Assets, ex: ['image'], ['image', 'file']...
+
+
 ## Usage
 Angular 9
 
