@@ -15,11 +15,11 @@ import {
  } from '@angular-devkit/schematics';
 import { Schema as ContentfulOptions } from './schema';
 import { 
-  addEnvironmentVar,
-  // addStyles,
-  getAppName,
-  // addIdToElement
-} from 'cap-utilities';
+  addEnvironmentVar
+} from './cap-utils';
+import { 
+  getAppName
+} from './cap-utils/package';
 import { FileSystemSchematicContext } from '@angular-devkit/schematics/tools';
 import { getWorkspace } from '@schematics/angular/utility/config';
 import {

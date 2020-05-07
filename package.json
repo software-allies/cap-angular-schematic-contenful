@@ -1,6 +1,6 @@
 {
   "name": "cap-angular-schematic-contentful",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A CAP Contentful Schematic",
   "scripts": {
     "build": "tsc -p tsconfig.json",
@@ -39,6 +39,7 @@
     "cap-utilities": "0.0.3",
     "@types/node": "^12.11.1",
     "@types/jasmine": "~3.5.0",
+    "@types/parse5": "^5.0.2",
     "jasmine": "^3.5.0"
   }
 }
