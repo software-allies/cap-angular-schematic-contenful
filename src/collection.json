@@ -1,0 +1,14 @@
+{
+  "$schema": "../node_modules/@angular-devkit/schematics/collection-schema.json",
+  "schematics": {
+    "cap-angular-schematic-contentful": {
+      "description": "A blank schematic.",
+      "factory": "./cap-angular-schematic-contentful/index#capAngularSchematicContentful"
+    },
+    "ng-add": {
+      "description": "Add schematic",
+      "factory": "./ng-add/index",
+      "schema": "./cap-angular-schematic-contentful/schema.json"
+    }
+  }
+}
