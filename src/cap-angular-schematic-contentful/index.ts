@@ -157,10 +157,10 @@ export function capAngularSchematicContentful(options: any): Rule {
 
     return chain([
       branchAndMerge(chain([
+        mergeWith(templateSource),
         addToEnvironments(options),
         addToNgModule(options),
-        addPackageJsonDependencies(),
-        mergeWith(templateSource)
+        addPackageJsonDependencies()
       ])),
     ])(tree, context);
 
