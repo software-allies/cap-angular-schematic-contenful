@@ -11,7 +11,8 @@ import {
   mergeWith,
   SchematicsException,
   Tree,
-  url
+  url,
+  SchematicContext
  } from '@angular-devkit/schematics';
 import { Schema as ContentfulOptions } from './schema';
 import { 
@@ -20,10 +21,9 @@ import {
 import { 
   getAppName
 } from './cap-utils/package';
-import { FileSystemSchematicContext } from '@angular-devkit/schematics/tools';
+// import { FileSystemSchematicContext } from '@angular-devkit/schematics/tools';
 import { getWorkspace } from '@schematics/angular/utility/config';
 import {
-  // buildRelativePath, 
   findModule, 
   MODULE_EXT, 
   ROUTING_MODULE_EXT
@@ -31,9 +31,57 @@ import {
 import { parseName } from '@schematics/angular/utility/parse-name';
 import { buildDefaultPath } from '@schematics/angular/utility/project';
 import { getProjectFromWorkspace } from '@angular/cdk/schematics/utils/get-project';
+import * as ts from 'typescript';
+import { InsertChange } from '@schematics/angular/utility/change';
+import {
+  buildRelativePath
+} from '@schematics/angular/utility/find-module';
+import {
+  addImportToModule
+} from './vendored-ast-utils';
+import {
+  addPackageJsonDependency,
+  NodeDependency,
+  NodeDependencyType
+} from 'schematics-utilities';
 
 
 
+function readIntoSourceFile(host: Tree, filePath: string) {
+  const text = host.read(filePath);
+  if (text === null) {
+    throw new SchematicsException(`File ${filePath} does not exist.`);
+  }
+  return ts.createSourceFile(filePath, text.toString('utf-8'), ts.ScriptTarget.Latest, true);
+}
+
+function addToNgModule(options: ContentfulOptions): Rule {
+  return (host: Tree) => {
+    
+    const modulePath = options.module;
+    // Import CapAngularContentfulModule and declare
+    let source = readIntoSourceFile(host, modulePath);
+
+    const componentPath = `${options.path}/app/modules/cap-contentful/cap-angular-contentful.module`;
+    const relativePath = buildRelativePath(modulePath, componentPath);
+    const classifiedName = 'CapAngularContentfulModule';
+    const importRecorder = host.beginUpdate(modulePath);
+    const importChanges: any = addImportToModule(
+        source,
+        modulePath,
+        classifiedName,
+        relativePath);
+
+    for (const change of importChanges) {
+        if (change instanceof InsertChange) {
+          importRecorder.insertLeft(change.pos, change.toAdd);
+        }
+    }
+    host.commitUpdate(importRecorder);
+
+    return host;
+  };
+}
 
 function addToEnvironments(options: ContentfulOptions): Rule {
     return (host: Tree) => {
@@ -46,8 +94,21 @@ function addToEnvironments(options: ContentfulOptions): Rule {
     }
 }
 
+function addPackageJsonDependencies(): Rule {
+    return (host: Tree, context: SchematicContext) => {
+        const dependencies: NodeDependency[] = [
+            { type: NodeDependencyType.Default, version: '^0.0.1', name: 'cap-angular-contentful' },
+        ];
+        dependencies.forEach(dependency => {
+            addPackageJsonDependency(host, dependency);
+            context.logger.log('info', `✅️ Added "${dependency.name}" into ${dependency.type}`);
+        });
+        return host;
+    };
+}
+
 export function capAngularSchematicContentful(options: any): Rule {
-  return (tree: Tree, context: FileSystemSchematicContext) => {
+  return (tree: Tree, context: SchematicContext) => {
 
     // Get project
     options.project = (options.project) ? options.project : getAppName(tree);
@@ -97,6 +158,8 @@ export function capAngularSchematicContentful(options: any): Rule {
     return chain([
       branchAndMerge(chain([
         addToEnvironments(options),
+        addToNgModule(options),
+        addPackageJsonDependencies(),
         mergeWith(templateSource)
       ])),
     ])(tree, context);
