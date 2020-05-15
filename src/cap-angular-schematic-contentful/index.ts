@@ -98,6 +98,7 @@ function addPackageJsonDependencies(): Rule {
     return (host: Tree, context: SchematicContext) => {
         const dependencies: NodeDependency[] = [
             { type: NodeDependencyType.Default, version: '^0.0.1', name: 'cap-angular-contentful' },
+            { type: NodeDependencyType.Default, version: '^1.0.0', name: 'marked' }
         ];
         dependencies.forEach(dependency => {
             addPackageJsonDependency(host, dependency);
@@ -106,6 +107,8 @@ function addPackageJsonDependencies(): Rule {
         return host;
     };
 }
+
+
 
 export function capAngularSchematicContentful(options: any): Rule {
   return (tree: Tree, context: SchematicContext) => {

@@ -58,7 +58,7 @@ Using this service all http requests can be intercepted by a Angular Http interc
 import { CapContentfulService } from './modules/cap-contentful/services/cap-contetful.service';
 ...
 
-socios: any[];
+items: any[];
 
 constructor(
     private capContentfulService: CapContentfulService
@@ -77,6 +77,16 @@ ngOnInit() {
 
 ```
 
+## Pipes
+Because in Contentful is possible use the Markdown format on text fileds, the CapContentfulModule have the next useful pipes:
+
+* md-to-html 
+    Convert Markdown to Html
+* strip-tags
+    Remove Html tags
+
+
+
 
 ## Usage
 Angular 9
@@ -85,7 +95,7 @@ Angular 9
 [Schematic](https://www.schematics.com/)
 
 ## Version 
-0.0.7
+0.0.10
 
 ## Authors
 Software Allies - [Software Allies](https://github.com/software-allies)
