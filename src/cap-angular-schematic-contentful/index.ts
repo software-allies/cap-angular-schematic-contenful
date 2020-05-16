@@ -46,7 +46,6 @@ import {
 } from 'schematics-utilities';
 
 
-
 function readIntoSourceFile(host: Tree, filePath: string) {
   const text = host.read(filePath);
   if (text === null) {
