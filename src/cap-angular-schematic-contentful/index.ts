@@ -12,7 +12,7 @@ import {
   SchematicsException,
   Tree,
   url,
-  SchematicContext
+  // SchematicContext
  } from '@angular-devkit/schematics';
 import { Schema as ContentfulOptions } from './schema';
 import { 
@@ -21,7 +21,7 @@ import {
 import { 
   getAppName
 } from './cap-utils/package';
-// import { FileSystemSchematicContext } from '@angular-devkit/schematics/tools';
+import { FileSystemSchematicContext } from '@angular-devkit/schematics/tools';
 import { getWorkspace } from '@schematics/angular/utility/config';
 import {
   findModule, 
@@ -95,7 +95,7 @@ function addToEnvironments(options: ContentfulOptions): Rule {
 }
 
 function addPackageJsonDependencies(): Rule {
-    return (host: Tree, context: SchematicContext) => {
+    return (host: Tree, context: FileSystemSchematicContext) => {
         const dependencies: NodeDependency[] = [
             { type: NodeDependencyType.Default, version: '^0.0.1', name: 'cap-angular-contentful' },
             { type: NodeDependencyType.Default, version: '^1.0.0', name: 'marked' }
@@ -108,18 +108,16 @@ function addPackageJsonDependencies(): Rule {
     };
 }
 
-
-
-export function capAngularSchematicContentful(options: any): Rule {
-  return (tree: Tree, context: SchematicContext) => {
+export function capAngularSchematicContentful(options: ContentfulOptions): Rule {
+  return (host: Tree, context: FileSystemSchematicContext) => {
 
     // Get project
-    options.project = (options.project) ? options.project : getAppName(tree);
+    options.project = (options.project) ? options.project : getAppName(host);
     if (!options.project) {
       throw new SchematicsException('Option "project" is required.');
     }
 
-    const workspace = getWorkspace(tree);
+    const workspace = getWorkspace(host);
     const project: any = getProjectFromWorkspace(workspace, options.project);
     if (!project) {
       throw new SchematicsException(`Project is not defined in this workspace.`);
@@ -129,7 +127,7 @@ export function capAngularSchematicContentful(options: any): Rule {
       options.path = buildDefaultPath(project);
     }
     
-    options.module = findModule(tree, options.path, 'app' + MODULE_EXT, ROUTING_MODULE_EXT);
+    options.module = findModule(host, options.path, 'app' + MODULE_EXT, ROUTING_MODULE_EXT);
     options.name = '';
     const parsedPath = parseName(options.path!, options.name);
     options.name = parsedPath.name;
@@ -151,8 +149,8 @@ export function capAngularSchematicContentful(options: any): Rule {
       template(baseTemplateContext),
       move(null as any, parsedPath.path),
       forEach((fileEntry: FileEntry) => {
-        if (tree.exists(fileEntry.path)) {
-          tree.overwrite(fileEntry.path, fileEntry.content);
+        if (host.exists(fileEntry.path)) {
+          host.overwrite(fileEntry.path, fileEntry.content);
         }
         return fileEntry;
       })
@@ -160,12 +158,12 @@ export function capAngularSchematicContentful(options: any): Rule {
 
     return chain([
       branchAndMerge(chain([
-        mergeWith(templateSource),
         addToEnvironments(options),
         addToNgModule(options),
-        addPackageJsonDependencies()
+        addPackageJsonDependencies(),
+        mergeWith(templateSource)
       ])),
-    ])(tree, context);
+    ])(host, context);
 
   };
 }

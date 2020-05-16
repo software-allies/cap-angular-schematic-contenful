@@ -95,7 +95,7 @@ Angular 9
 [Schematic](https://www.schematics.com/)
 
 ## Version 
-0.0.10
+0.0.11
 
 ## Authors
 Software Allies - [Software Allies](https://github.com/software-allies)
