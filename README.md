@@ -55,17 +55,17 @@ Using this service all http requests can be intercepted by a Angular Http interc
 
 ### TS Logic
 ```
-import { CapContentfulService } from './modules/cap-contentful/services/cap-contetful.service';
+import { ContentfulService } from '../modules/cap-contentful/services/cap-contetful.service';
 ...
 
 items: any[];
 
 constructor(
-    private capContentfulService: CapContentfulService
+    private contentfulService: ContentfulService
 ) {}
 
 ngOnInit() {
-    this.capContentfulService.getItems('items', ['logo'])
+    this.contentfulService.getItems('items', ['logo'])
         .subscribe((response: any) => {
             let _items = [];
             response.items.forEach((item) => {
