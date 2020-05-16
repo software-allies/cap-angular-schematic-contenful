@@ -15,9 +15,9 @@ import { StripTagsPipe } from './pipes/strip-tags.pipe';
   imports: [
     CommonModule,
     CapContentfulModule.forRoot({
-      space: environment.space,
-      accessToken: environment.accessToken,
-      environment: environment.environment
+      space: environment.contSpace,
+      accessToken: environment.contAccessToken,
+      environment: environment.contEnvironment
     })
   ],
   exports: [

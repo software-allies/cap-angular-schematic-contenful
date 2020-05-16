@@ -86,10 +86,10 @@ function addToEnvironments(options: ContentfulOptions): Rule {
     return (host: Tree) => {
         addEnvironmentVar(host, '', options.path || '/src', 'contAccessToken', options.contAccessToken);
         addEnvironmentVar(host, '', options.path || '/src', 'contSpace', options.contSpace);
-        addEnvironmentVar(host, '', options.path || '/src', 'contentfulEnvironment', options.contentfulEnvironment);
+        addEnvironmentVar(host, '', options.path || '/src', 'contEnvironment', options.contEnvironment);
         addEnvironmentVar(host, 'prod', options.path || '/src', 'contAccessToken', options.contAccessToken);
         addEnvironmentVar(host, 'prod', options.path || '/src', 'contSpace', options.contSpace);
-        addEnvironmentVar(host, 'prod', options.path || '/src', 'contentfulEnvironment', options.contentfulEnvironment);
+        addEnvironmentVar(host, 'prod', options.path || '/src', 'contEnvironment', options.contEnvironment);
     }
 }
 

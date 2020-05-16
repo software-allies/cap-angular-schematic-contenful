@@ -1,7 +1,7 @@
 export interface Schema {
     contAccessToken: string;
     contSpace: string;
-    contentfulEnvironment: string;
+    contEnvironment: string;
     project?: string;
     name?: string;
     path?: string;
