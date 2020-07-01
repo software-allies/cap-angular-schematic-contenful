@@ -1,6 +1,6 @@
 {
   "name": "cap-angular-schematic-contentful",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A CAP Contentful Schematic",
   "scripts": {
     "build": "tsc -p tsconfig.json",
@@ -29,17 +29,17 @@
   "dependencies": {
     "@angular/cdk": "^8.2.3",
     "@schematics/angular": "^8.3.23",
-    "cap-utilities": "0.0.3",
+    "cap-angular-contentful": "0.0.1",
+    "cap-utilities": "0.0.12",
     "schematics-utilities": "^2.0.1"
   },
   "devDependencies": {
     "@angular-devkit/core": "^9.1.4",
     "@angular-devkit/schematics": "^9.1.4",
-    "typescript": "~3.8.2",
-    "cap-utilities": "0.0.3",
-    "@types/node": "^12.11.1",
     "@types/jasmine": "~3.5.0",
+    "@types/node": "^12.11.1",
     "@types/parse5": "^5.0.2",
-    "jasmine": "^3.5.0"
+    "jasmine": "^3.5.0",
+    "typescript": "~3.8.2"
   }
 }
