@@ -4,7 +4,7 @@
   "title": "CAP Schematics Contentful Service",
   "type": "object",
   "properties": {
-    "contSpace": {
+    "space_id": {
       "type": "string",
       "description": "Contentful Space",
       "x-prompt": "What is the Contentful Space?",
@@ -13,24 +13,24 @@
         "index": 0
       }
     },
-    "contAccessToken": {
+    "environment": {
       "type": "string",
-      "description": "Contentful Access Token",
-      "x-prompt": "What is the Contentful access token?",
+      "description": "Contentful Environment",
+      "x-prompt": "What is the Contentful Environment?",
       "$default": {
         "$source": "argv",
         "index": 1
       }
     },
-    "contentfulEnvironment": {
+    "delivery_accessToken": {
       "type": "string",
-      "description": "Contentful Environment",
-      "x-prompt": "What is the Contentful Environment?",
+      "description": "Contentful Access Token",
+      "x-prompt": "What is the Contentful access token?",
       "$default": {
         "$source": "argv",
         "index": 2
       }
     }
   },
-  "required": ["contSpace", "contAccessToken", "contentfulEnvironment"]
+  "required": ["space_id", "environment", "delivery_accessToken"]
 }

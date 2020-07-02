@@ -20,48 +20,48 @@ export function installPackageJsonDependencies(): Rule {
   };
 }
 
-// function addToEnvironments(options: ContentfulOptions): Rule {
-//   return (host: Tree) => {
-//     cap_utilities.addEnvironmentVar(host, [
-//       {
-//         env: '',
-//         appPath: options.path || '/src',
-//         key: 'contAccessToken',
-//         value: options.contAccessToken
-//       },
-//       {
-//         env: '',
-//         appPath: options.path || '/src',
-//         key: 'contSpace',
-//         value: options.contSpace
-//       },
-//       {
-//         env: '',
-//         appPath: options.path || '/src',
-//         key: 'contentfulEnvironment',
-//         value: options.contentfulEnvironment
-//       },
-//       {
-//         env: 'prod',
-//         appPath: options.path || '/src',
-//         key: 'contAccessToken',
-//         value: options.contAccessToken
-//       },
-//       {
-//         env: 'prod',
-//         appPath: options.path || '/src',
-//         key: 'contSpace',
-//         value: options.contSpace
-//       },
-//       {
-//         env: 'prod',
-//         appPath: options.path || '/src',
-//         key: 'contentfulEnvironment',
-//         value: options.contentfulEnvironment
-//       },
-//     ])
-//   }
-// }
+function addToEnvironments(options: ContentfulOptions): Rule {
+  return (host: Tree) => {
+    cap_utilities.addEnvironmentVar(host, [
+      {
+        env: '',
+        appPath: options.path || '/src',
+        key: 'contSpace',
+        value: options.space_id
+      },
+      {
+        env: '',
+        appPath: options.path || '/src',
+        key: 'contentfulEnvironment',
+        value: options.environment
+      },
+      {
+        env: '',
+        appPath: options.path || '/src',
+        key: 'contAccessToken',
+        value: options.delivery_accessToken
+      },
+      {
+        env: 'prod',
+        appPath: options.path || '/src',
+        key: 'contSpace',
+        value: options.space_id
+      },
+      {
+        env: 'prod',
+        appPath: options.path || '/src',
+        key: 'contentfulEnvironment',
+        value: options.environment
+      },
+      {
+        env: 'prod',
+        appPath: options.path || '/src',
+        key: 'contAccessToken',
+        value: options.delivery_accessToken
+      }
+    ])
+  }
+}
 
 
 function installDependencies() {
@@ -87,15 +87,15 @@ function addToRootModule(options: ContentfulOptions) {
           params: [
             {
               name: 'space_id',
-              value: `${options.contSpace}`,
+              value: `${options.space_id}`,
             },
             {
               name: 'environment',
-              value: `${options.contentfulEnvironment}`
+              value: `${options.environment}`
             },
             {
               name: 'delivery_accessToken',
-              value: `${options.contAccessToken}`
+              value: `${options.delivery_accessToken}`
             }
           ]
         }
@@ -113,7 +113,7 @@ export function capAngularSchematicContentful(options: any): Rule {
       branchAndMerge(chain([
         installDependencies(),
         installPackageJsonDependencies(),
-        // addToEnvironments(options),
+        addToEnvironments(options),
         addToRootModule(options)
       ])),
     ])(tree, context);

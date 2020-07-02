@@ -1,9 +1,9 @@
 export interface Schema {
-    contAccessToken: string;
-    contSpace: string;
-    contentfulEnvironment: string;
-    project?: string;
-    name?: string;
-    path?: string;
-    module?: any;
+  space_id: string;
+  environment: string;
+  delivery_accessToken: string;
+  project?: string;
+  name?: string;
+  path?: string;
+  module?: any;
 }
