@@ -4,13 +4,35 @@
   "title": "CAP Schematics Contentful Service",
   "type": "object",
   "properties": {
+    "version": {
+      "type": "number",
+      "description": "Angular version",
+      "x-prompt": {
+        "message": "Which angular version do you have installed? ",
+        "type": "list",
+        "items": [
+          {
+            "value": 8,
+            "label": "Angular 8"
+          },
+          {
+            "value": 9,
+            "label": "Angular 9"
+          }
+        ]
+      },
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      }
+    },
     "space_id": {
       "type": "string",
       "description": "Contentful Space",
       "x-prompt": "What is the Contentful Space?",
       "$default": {
         "$source": "argv",
-        "index": 0
+        "index": 1
       }
     },
     "environment": {
@@ -19,7 +41,7 @@
       "x-prompt": "What is the Contentful Environment?",
       "$default": {
         "$source": "argv",
-        "index": 1
+        "index": 2
       }
     },
     "delivery_accessToken": {
@@ -28,9 +50,14 @@
       "x-prompt": "What is the Contentful access token?",
       "$default": {
         "$source": "argv",
-        "index": 2
+        "index": 3
       }
     }
   },
-  "required": ["space_id", "environment", "delivery_accessToken"]
+  "required": [
+    "version",
+    "space_id",
+    "environment",
+    "delivery_accessToken"
+  ]
 }

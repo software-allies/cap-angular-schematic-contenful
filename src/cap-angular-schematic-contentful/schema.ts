@@ -6,4 +6,5 @@ export interface Schema {
   name?: string;
   path?: string;
   module?: any;
+  version: number;
 }
